@@ -1,0 +1,31 @@
+{
+  "description": "Claude Code project settings for alpha-bench",
+  "autoApprove": {
+    "bash": [
+      "pytest",
+      "pytest -v",
+      "pytest --cov",
+      "pytest --cov=alpha_bench",
+      "pytest --cov=alpha_bench --cov-report=html",
+      "pytest --cov=alpha_bench --cov-report=term",
+      "black .",
+      "black --check .",
+      "isort .",
+      "isort --check-only .",
+      "flake8 .",
+      "mypy alpha_bench/",
+      "streamlit run alpha_bench/dashboard/app.py",
+      "airflow dags list",
+      "airflow dags test benchmark_pipeline *",
+      "airflow dags trigger benchmark_pipeline",
+      "airflow scheduler",
+      "airflow webserver",
+      "python scripts/run_benchmark.py *",
+      "python -c *"
+    ]
+  },
+  "context": {
+    "warnAtTokens": 150000,
+    "maxTokens": 200000
+  }
+}

@@ -1,0 +1,35 @@
+# Core Dependencies
+pandas>=2.0.0
+pyarrow>=12.0.0
+numpy>=1.24.0
+pydantic>=2.0.0
+python-dotenv>=1.0.0
+
+# LLM Integration
+anthropic>=0.18.0
+llama-cpp-python>=0.2.0
+
+# Orchestration
+apache-airflow>=2.8.0
+apache-airflow-providers-http>=4.0.0
+
+# Dashboard
+streamlit>=1.30.0
+plotly>=5.18.0
+altair>=5.2.0
+
+# Data APIs
+# Uncomment based on your data provider:
+# yfinance>=0.2.0              # Yahoo Finance
+# alpaca-py>=0.8.0             # Alpaca
+# alpha-vantage>=2.3.0         # Alpha Vantage
+# ccxt>=4.0.0                  # Crypto exchanges
+
+# HTTP & Async
+requests>=2.31.0
+aiohttp>=3.9.0
+
+# Utilities
+tenacity>=8.2.0
+pyyaml>=6.0.0
+```

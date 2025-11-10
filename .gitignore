@@ -1,0 +1,154 @@
+# OS Files
+.DS_Store
+Thumbs.db
+*~
+.Spotlight-V100
+.Trashes
+
+# Editor and IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*.swn
+.vim/
+*.sublime-project
+*.sublime-workspace
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Testing
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+coverage.xml
+*.cover
+.hypothesis/
+.pytest_cache/
+
+# Virtual Environments
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+.venv/
+
+# Environment Variables
+.env
+.env.local
+.env.*.local
+.env.production
+
+# Airflow
+airflow_home/
+airflow.db
+airflow.cfg
+logs/
+*.log
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb
+
+# Data (gitignore large data files, keep structure)
+data/runs/*/
+data/cache/*/
+results/*/
+# Keep example data:
+!data/runs/.gitkeep
+!data/cache/.gitkeep
+!results/.gitkeep
+
+# Parquet files (can be large)
+*.parquet
+
+# Claude Code specific
+.claude.json
+.claude.json.backup
+.claude/settings.local.json
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Temporary files
+*.tmp
+*.temp
+tmp/
+temp/
+*.bak
+*.backup
+
+# Build artifacts
+*.o
+*.a
+*.exe
+*.dll
+*.dylib
+
+# Archives
+*.zip
+*.tar.gz
+*.tar.bz2
+*.rar
+*.7z
+
+# Node.js (if any JS tools used)
+node_modules/
+
+# MyPy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Profiling
+*.prof
+*.lprof
+
+# Local development
+local/
+scratch/
+experiments/drafts/
+personal-notes/
+
+# Model files (can be very large)
+models/*.gguf
+models/*.bin
+models/*.safetensors
+
+# Documentation build
+site/
+docs/_build/
+
+# MacOS
+.DS_Store
+.AppleDouble
+.LSOverride

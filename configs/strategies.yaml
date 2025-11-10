@@ -1,0 +1,213 @@
+# ============================================
+# alpha-bench Trading Strategies Configuration
+# ============================================
+# This file defines trading strategy parameters and rules
+# that apply across all models.
+
+# ============================================
+# Position Sizing
+# ============================================
+
+position_sizing:
+  default_method: "fixed_fractional"
+
+  fixed_fractional:
+    # Risk fraction of total capital per trade
+    risk_fraction: 0.01
+    max_position_size: 0.25  # Max 25% of capital in single position
+
+  kelly_criterion:
+    # Kelly criterion with safety factor
+    enabled: false
+    safety_factor: 0.5
+    min_win_rate: 0.4  # Minimum win rate before using Kelly
+
+  volatility_adjusted:
+    # Position size inversely proportional to volatility
+    enabled: false
+    target_volatility: 0.15  # 15% annualized
+    lookback_period: 30  # days
+
+# ============================================
+# Risk Management
+# ============================================
+
+risk_management:
+  # Global limits
+  max_total_exposure: 1.0  # 100% of capital max
+  max_leverage: 1.0  # No leverage (paper trading)
+
+  # Per-trade limits
+  max_loss_per_trade: 0.02  # Stop loss at -2%
+  max_win_per_trade: 0.10  # Take profit at +10%
+
+  # Portfolio limits
+  max_daily_loss: 0.05  # Stop trading if down -5% in a day
+  max_drawdown: 0.20  # Circuit breaker at -20% drawdown
+
+  # Diversification
+  max_positions: 5  # Max concurrent positions
+  min_correlation: -0.5  # Avoid highly correlated positions
+
+# ============================================
+# Execution Parameters
+# ============================================
+
+execution:
+  # Order types
+  default_order_type: "market"  # market, limit, stop
+
+  # Slippage model
+  slippage:
+    enabled: true
+    model: "proportional"  # proportional, fixed, volume_based
+    proportional_rate: 0.0005  # 0.05% slippage
+    min_slippage: 0.0001
+    max_slippage: 0.005
+
+  # Fees
+  fees:
+    maker_fee: 0.001  # 0.1% maker fee
+    taker_fee: 0.001  # 0.1% taker fee
+    withdrawal_fee: 0.0
+
+  # Timing
+  min_hold_time: 60  # seconds (prevent rapid flip-flop)
+  max_order_age: 300  # seconds (cancel stale orders)
+
+# ============================================
+# Strategy Types
+# ============================================
+
+strategies:
+  # Trend Following
+  trend_following:
+    enabled: true
+    indicators:
+      - ema_crossover
+      - macd
+    confirmation_required: 2  # Require 2+ indicators to agree
+
+  # Mean Reversion
+  mean_reversion:
+    enabled: false
+    indicators:
+      - bollinger_bands
+      - rsi
+    oversold_threshold: 30
+    overbought_threshold: 70
+
+  # Momentum
+  momentum:
+    enabled: false
+    lookback_period: 20
+    entry_threshold: 0.02  # 2% momentum
+
+  # Breakout
+  breakout:
+    enabled: false
+    lookback_period: 50
+    volume_confirmation: true
+    volume_multiplier: 1.5
+
+# ============================================
+# Baseline Strategy Configs
+# ============================================
+
+baseline_strategies:
+  random:
+    action_distribution:
+      buy: 0.33
+      sell: 0.33
+      hold: 0.34
+    position_size: 0.01  # Always 1% of capital
+
+  ema_crossover:
+    fast_ema: 12
+    slow_ema: 26
+    signal_confirmation: true
+    position_size: 0.02
+
+  buy_and_hold:
+    initial_buy_fraction: 0.95  # Buy 95% at start
+    rebalance_period: never
+
+# ============================================
+# Backtesting Parameters
+# ============================================
+
+backtesting:
+  # Data
+  default_lookback: 72  # hours
+  default_forecast: 24  # hours
+  warmup_period: 24  # hours of data before first trade
+
+  # Simulation
+  initial_capital: 10000  # USD
+  starting_positions: []  # Empty (all cash)
+
+  # Realism
+  realistic_execution: true
+  account_for_spreads: true
+  weekend_trading: false  # No trading Sat/Sun for stocks
+
+  # Logging
+  log_all_decisions: true
+  log_rationale: true
+  save_portfolio_snapshots: true
+  snapshot_frequency: 3600  # seconds
+
+# ============================================
+# Performance Metrics
+# ============================================
+
+metrics:
+  # Returns
+  calculate_returns: true
+  annualization_factor: 252  # Trading days per year
+
+  # Risk-adjusted
+  risk_free_rate: 0.04  # 4% annual risk-free rate
+  calculate_sharpe: true
+  calculate_sortino: true
+  calculate_calmar: true
+
+  # Drawdown
+  calculate_max_drawdown: true
+  calculate_drawdown_duration: true
+
+  # Trading activity
+  calculate_turnover: true
+  calculate_win_rate: true
+  calculate_profit_factor: true
+
+  # Custom
+  calculate_feature_importance: true
+  calculate_model_confidence: true
+
+# ============================================
+# Alerts & Notifications
+# ============================================
+
+alerts:
+  # Enable/disable
+  enabled: false
+
+  # Conditions
+  max_drawdown_breach: true
+  daily_loss_limit_hit: true
+  exceptional_performance: true  # >3 sigma returns
+  model_errors: true
+
+  # Channels
+  email: false
+  slack: false
+  log_only: true
+
+# ============================================
+# Versioning
+# ============================================
+
+config_version: "1.0.0"
+last_updated: "2025-11-10"
+compatible_with: "RFC-001-A"
